@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <title>ZaloPay</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://static.zalopay.com.vn/webresources/images/favicon.ico" />
+    <script type="text/javascript">
+        var strQuery = function() {
+            var d = {};
+            var c = window.location.search.substring(1);
+            var e = c.split("&");
+            for (var b = 0; b < e.length; b++) {
+                var f = e[b].split("=");
+                if (typeof d[f[0]] === "undefined") {
+                    d[f[0]] = decodeURIComponent(f[1])
+                } else {
+                    if (typeof d[f[0]] === "string") {
+                        var a = [d[f[0]], decodeURIComponent(f[1])];
+                        d[f[0]] = a
+                    } else {
+                        d[f[0]].push(decodeURIComponent(f[1]))
+                    }
+                }
+            }
+            return d
+        }();
+
+        function webos() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            if (userAgent.match(/Android/i)) return "android";
+            else if (userAgent.match(/iPhone|iPad|iPod/i)) return "ios";
+            else return "";
+        };
+        var webos = webos();
+        var url = "https://zalopay.com.vn";
+        var type = "";
+        if (webos === "android" || webos === "ios") {
+            switch (strQuery.type) {
+                case "transfer":
+                    url = "zalopay://launch/f/transfer";
+                    type = "transfer";
+                    break;
+                case "receive":
+                    url = "zalopay://launch/f/receive";
+                    type = "receive";
+                    break;
+                case "wallettopup":
+                    url = "zalopay://launch/f/wallettopup";
+                    type = "wallettopup";
+                    break;
+                case "app":
+                    var appid = parseInt(strQuery.appid);
+                    if (appid > 0) {
+                        url = "zalopay://launch/app/" + appid;
+                        type = "app";
+                    }
+                    break;
+                case "promotion":
+                    url = "zalopay://launch/tab/promotion";
+                    type = "promotion";
+                    break;
+                case "userprofile":
+                    url = "zalopay://launch/f/userprofile";
+                    type = "userprofile";
+                    break;
+                case "tab":
+                    var name = strQuery.name.replace(/ /g,'').toLowerCase();
+                    if (name !== "") {
+                        url = "zalopay://launch/tab/" + name;
+                        type = "tab";
+                    }
+                    break;
+                case "f":
+                    var name = strQuery.name.replace(/ /g,'').toLowerCase();
+                    if (name !== "") {
+                        url = "zalopay://launch/f/" + name;
+                        type = "feature";
+                    }
+                    break;
+            }
+        }
+        if (webos === "ios" && type === "") {
+            window.location.href = "https://itunes.apple.com/vn/app/zalopay-thanh-to%C3%A1n-trong-2s/id1112407590?l=vi&mt=8";
+        } else if (webos === "android" && type === "") {
+            window.location.href = "https://play.google.com/store/apps/details?id=vn.com.vng.zalopay&hl=vi";
+        } else {
+            window.location.href = url;
+            var lag = 1250;
+            if (url !== "https://zalopay.com.vn") {
+                setTimeout(function() {
+                    window.location.href = "https://zalopay.com.vn";
+                }, lag);
+            }
+        }
+
+    </script>
+</head>
+
+<body></body>
+
+</html>
