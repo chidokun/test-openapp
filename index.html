@@ -88,14 +88,14 @@
         var ping = function (url, callback) {
             var xhttp;
             xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
+            xhttp.onreadystatechange = function(this) {
                 document.writeln("callback result: " + JSON.stringify(this));
                 if (this.readyState == 4 && this.status == 200) {
                     callback(this);
                 }
             };
             xhttp.open("GET", url, true);
-            xhttp.onerror = function () {
+            xhttp.onerror = function (this) {
                 document.writeln("callback result error: " + JSON.stringify(this));
             }
             xhttp.send();
