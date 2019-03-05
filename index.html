@@ -83,6 +83,19 @@
                     break;
             }
         }
+
+        var ping = function (url, callback) {
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                document.writeln("callback result: " + JSON.stringify(this));
+                if (this.readyState == 4 && this.status == 200) {
+                    callback(this);
+                }
+            };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
         document.writeln("url: " + url);
         document.writeln("type: " + type);
         if (webos === "ios" && type === "") {
@@ -90,13 +103,14 @@
         } else if (webos === "android" && type === "") {
             window.location.href = "https://play.google.com/store/apps/details?id=vn.com.vng.zalopay&hl=vi";
         } else {
-            window.location.href = url;
-            var lag = 1250;
-            if (url !== "https://zalopay.com.vn") {
-                setTimeout(function() {
-                    window.location.href = "https://zalopay.com.vn";
-                }, lag);
-            }
+            ping(url);
+            // window.location.href = url;
+            // var lag = 1250;
+            // if (url !== "https://zalopay.com.vn") {
+            //     setTimeout(function() {
+            //         window.location.href = "https://zalopay.com.vn";
+            //     }, lag);
+            // }
         }
 
     </script>
