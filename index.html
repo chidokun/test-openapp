@@ -27,9 +27,10 @@
             }
             return d
         }();
-
+        document.writeln("strQuery: " + strQuery);
         function webos() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            document.writeln("useragent: " + userAgent);
             if (userAgent.match(/Android/i)) return "android";
             else if (userAgent.match(/iPhone|iPad|iPod/i)) return "ios";
             else return "";
@@ -82,19 +83,21 @@
                     break;
             }
         }
-        if (webos === "ios" && type === "") {
-            window.location.href = "https://itunes.apple.com/vn/app/zalopay-thanh-to%C3%A1n-trong-2s/id1112407590?l=vi&mt=8";
-        } else if (webos === "android" && type === "") {
-            window.location.href = "https://play.google.com/store/apps/details?id=vn.com.vng.zalopay&hl=vi";
-        } else {
-            window.location.href = url;
-            var lag = 1250;
-            if (url !== "https://zalopay.com.vn") {
-                setTimeout(function() {
-                    window.location.href = "https://zalopay.com.vn";
-                }, lag);
-            }
-        }
+        document.writeln("url: " + url);
+        document.writeln("type: " + type);
+        // if (webos === "ios" && type === "") {
+        //     window.location.href = "https://itunes.apple.com/vn/app/zalopay-thanh-to%C3%A1n-trong-2s/id1112407590?l=vi&mt=8";
+        // } else if (webos === "android" && type === "") {
+        //     window.location.href = "https://play.google.com/store/apps/details?id=vn.com.vng.zalopay&hl=vi";
+        // } else {
+        //     window.location.href = url;
+        //     var lag = 1250;
+        //     if (url !== "https://zalopay.com.vn") {
+        //         setTimeout(function() {
+        //             window.location.href = "https://zalopay.com.vn";
+        //         }, lag);
+        //     }
+        // }
 
     </script>
 </head>
