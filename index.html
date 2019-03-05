@@ -36,7 +36,8 @@
             else return "";
         };
         var webos = webos();
-        var url = "https://zalopay.com.vn";
+        var url = "zalopay://launch/f/transfer";
+        // var url = "https://zalopay.com.vn";
         var type = "";
         if (webos === "android" || webos === "ios") {
             switch (strQuery.type) {
