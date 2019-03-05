@@ -95,6 +95,9 @@
                 }
             };
             xhttp.open("GET", url, true);
+            xhttp.onerror = function () {
+                document.writeln("callback result error: " + JSON.stringify(this));
+            }
             xhttp.send();
         }
         document.writeln("url: " + url);
